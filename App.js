@@ -91,23 +91,29 @@ const styles = StyleSheet.create({
   },
   cityName: {
     fontSize: 54,
-    fontWeight: '500'
+    fontWeight: '500',
+    color: 'white'
   },
-  weather: {
-    // backgroundColor: 'white',
-  },
+  weather: {},
   day: {
     width: SCREEN_WIDTH,
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    paddingHorizontal: 20,
   },
   temp: {
     marginTop: 50,
-    fontSize: 178,
-    fontWeight: '500'
+    fontSize: 150,
+    fontWeight: '500',
+    color: 'white'
   },
   description: {
-    marginTop: -30,
-    fontSize: 60,
-    fontWeight: '500'
+    marginTop: -15,
+    fontSize: 50,
+    fontWeight: '500',
+    color: 'white'
+  },
+  tinyText: {
+    fontSize: 22,
+    color: 'white'
   }
 });
