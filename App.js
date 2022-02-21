@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
+import { Fontisto } from '@expo/vector-icons';
 
 const { width: SCREEN_WIDTH, height } = Dimensions.get('window');
+
 const API_KEY = 'f9671855cc1dad83ce46159fd131fc7f';
 
+const icons = {
+  Clouds: 'cloudy',
+  Clear: 'day-sunny',
+  Atmosphere: 'cloudy-gusts',
+  Snow: 'snow',
+  Rain: 'rain',
+  Drizzle: 'rains',
+  Thunderstorm: 'lightning',
+}
 
 export default function App () {
   const [city, setCity] = useState('Loding...');
@@ -37,18 +48,32 @@ export default function App () {
       <View style={styles.city}>
         <Text style={styles.cityName}>{city}</Text>
       </View>
-      <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} contentContainerStyle={styles.weather}>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.weather}
+      >
         {days.length ?
           days.map((day, i) =>
             <View style={styles.day} key={i}>
-              <Text style={styles.temp}>{parseFloat(day.temp.day).toFixed(2)}</Text>
+              <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+              }}
+              >
+                <Text style={styles.temp}>{parseFloat(day.temp.day).toFixed(1)}</Text>
+                <Fontisto name={icons[day.weather[0].main]} size={54} color="white" />
+              </View>
               <Text style={styles.description}>{day.weather[0].main}</Text>
+              <Text style={styles.tinyText}>{day.weather[0].description}</Text>
             </View>) :
-            <View style={styles.day}>
-              <ActivityIndicator color='white' size='large' style={{marginTop: 10}}/>
+            <View style={{...styles.day, alignItems: 'center'}}>
+              <ActivityIndicator color='white' size='large' style={{ marginTop: 10 }} />
             </View>
         }
-
       </ScrollView>
     </View>
   );
