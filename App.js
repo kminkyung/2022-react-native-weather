@@ -27,9 +27,9 @@ export default function App () {
     const {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync({ accuracy: 5 });
     const [location] = await Location.reverseGeocodeAsync({latitude, longitude}, {useGoogleMaps: false});
     setCity(location.city);
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}&units=metric`);
     const json = await response.json();
-    // setDays(json.daily);
+    setDays(json.daily);
   }
 
   const getPermission = async () => {
